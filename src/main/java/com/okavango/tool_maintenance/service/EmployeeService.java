@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,6 +26,12 @@ public class EmployeeService {
         Employee employee = new Employee(e.getName(), e.getUsername().toLowerCase(), e.getPassword(), e.getRole());
         employeeRepository.save(employee);
         return ResponseEntity.ok(new EmployeeResponseDTO(employee));
+    }
+
+    @Transactional(readOnly = true)
+    public ResponseEntity<EmployeeResponseDTO> getEmployeeById(Long id) {
+        Optional<Employee> employee = employeeRepository.findById(id);
+        return ResponseEntity.ok(new EmployeeResponseDTO(employee.get()));
     }
 
     @Transactional(readOnly = true)

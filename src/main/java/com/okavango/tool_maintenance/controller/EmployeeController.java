@@ -23,8 +23,13 @@ public class EmployeeController {
         return employeeService.addEmployee(employee);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<EmployeeResponseDTO> getEmployee(@PathVariable Long id) {
+        return employeeService.getEmployeeById(id);
+    }
+
     @GetMapping
-    public ResponseEntity<ResponsePaginated<EmployeeResponseDTO>> getEmployees(@PageableDefault(size=12) Pageable pageable) {
+    public ResponseEntity<ResponsePaginated<EmployeeResponseDTO>> getEmployees(@PageableDefault(size = 12) Pageable pageable) {
         return employeeService.getEmployees(pageable);
     }
 }
