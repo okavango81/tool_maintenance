@@ -15,7 +15,7 @@ public class EmployeeRegisterDTO {
     private String name;
 
     @NotBlank
-    @Email(regexp = " ", message = "deve ser o formato de um email válido")
+    @Email(message = "deve ser o formato de um email válido", regexp ="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
     private String username;
 
     @NotBlank
