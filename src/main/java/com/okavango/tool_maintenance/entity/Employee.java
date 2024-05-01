@@ -2,7 +2,6 @@ package com.okavango.tool_maintenance.entity;
 
 import com.okavango.tool_maintenance.enumeration.Role;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
