@@ -7,6 +7,7 @@ import com.okavango.tool_maintenance.pagination.ResponsePaginated;
 import com.okavango.tool_maintenance.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +24,7 @@ public class EmployeeService {
 
     @Transactional
     public ResponseEntity<EmployeeResponseDTO> addEmployee(EmployeeRegisterDTO e) {
-        Employee employee = new Employee(e.getName(), e.getUsername().toLowerCase(), e.getPassword(), e.getRole());
+        Employee employee = new Employee(e.getName().toUpperCase(), e.getUsername().toLowerCase(), e.getPassword(), e.getRole());
         employeeRepository.save(employee);
         return ResponseEntity.ok(new EmployeeResponseDTO(employee));
     }
@@ -52,5 +53,11 @@ public class EmployeeService {
         return ResponseEntity.ok(empResponse);
     }
 
+    @Transactional
+    public ResponseEntity<Void> deleteEmployee(Long id) {
+        getEmployeeById(id);
+        employeeRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

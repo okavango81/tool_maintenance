@@ -32,4 +32,9 @@ public class EmployeeController {
     public ResponseEntity<ResponsePaginated<EmployeeResponseDTO>> getEmployees(@PageableDefault(size = 12) Pageable pageable) {
         return employeeService.getEmployees(pageable);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
+        return employeeService.deleteEmployee(id);
+    }
 }
